@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#FFF6E1">
+<meta name="description" content="奶蛙动作图鉴：6 个动作档案，点开卡片才看得到它怎么笑。">
+<title>奶蛙狂笑图鉴 · 点一下，就狂笑</title>
+<style>
+:root{
+  --bg:#FFF6E1;
+  --ink:#2E2415;
+  --yellow:#FFD23F;
+  --cream:#FFFDF6;
+  --muted:#7A6A50;
+  --line:rgba(46,36,21,.14);
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.is-locked,body.is-locked{overflow:hidden}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  color:var(--ink);
+  background-color:var(--bg);
+  background-image:radial-gradient(rgba(46,36,21,.075) 1px,transparent 1.2px);
+  background-size:22px 22px;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+button{
+  font:inherit;color:inherit;border:0;background:none;padding:0;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+h1,h2,h3,p,ol{margin:0}
+ol{padding:0;list-style:none}
+.page{max-width:520px;margin:0 auto;padding:0 20px 44px;position:relative}
+
+/* ---------- 顶部 ---------- */
+.nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:calc(16px + env(safe-area-inset-top));
+  font-size:10.5px;letter-spacing:.13em;font-weight:800;
+}
+.nav-logo{display:flex;align-items:center;gap:8px}
+.nav-dot{width:9px;height:9px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--yellow)}
+.nav-tag{color:var(--muted);font-weight:700;letter-spacing:.04em}
+
+/* ---------- Hero ---------- */
+.hero{padding-top:26px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--muted);font-weight:700}
+.hero-title{
+  margin:10px 0 14px;font-size:clamp(52px,18.2vw,78px);line-height:.95;
+  font-weight:900;letter-spacing:-.03em;
+}
+.t-pre{display:block;font-size:.35em;letter-spacing:.03em;font-weight:800;margin-bottom:8px}
+.t-main{display:block;white-space:nowrap}
+.mark{background:linear-gradient(transparent 54%,var(--yellow) 54%,var(--yellow) 90%,transparent 90%);padding:0 4px}
+.hero-desc{font-size:14.5px;line-height:1.7;color:#5E4E37;font-weight:600}
+.hero-desc br{display:block}
+
+.hero-art{position:relative;width:min(84vw,330px);height:min(84vw,330px);aspect-ratio:1;margin:24px auto 10px}
+.art-circle{
+  position:absolute;inset:9%;border-radius:50%;
+  background:radial-gradient(circle at 34% 26%,#FFE88A,#FFD23F 54%,#F3AF1D);
+  border:2.5px solid var(--ink);
+  box-shadow:0 8px 0 rgba(46,36,21,.85);
+}
+.art-ring{
+  position:absolute;inset:2%;border-radius:50%;
+  border:2px dashed rgba(46,36,21,.32);
+  animation:spin 36s linear infinite;
+}
+.hero-art .hero-frog{position:absolute;inset:13% 11% 7%;width:auto;height:auto;z-index:2}
+.hero-frog svg{filter:drop-shadow(0 12px 16px rgba(90,55,0,.18))}
+.hero-bubble{
+  position:absolute;z-index:3;font-weight:900;background:#fff;
+  border:2px solid var(--ink);border-radius:999px;padding:2px 10px;
+  font-size:15px;box-shadow:0 3px 0 var(--ink);white-space:nowrap;
+}
+.hb1{top:7%;left:-3%;transform:rotate(-9deg)}
+.hb2{top:23%;right:-4%;transform:rotate(7deg);font-size:19px;background:var(--yellow)}
+.hb3{bottom:12%;left:1%;transform:rotate(5deg);font-size:12px}
+.art-badge{
+  position:absolute;z-index:3;right:-2%;bottom:5%;width:76px;height:76px;border-radius:50%;
+  background:#fff;border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink);
+  display:grid;place-items:center;text-align:center;font-size:10px;font-weight:900;
+  line-height:1.15;letter-spacing:.04em;transform:rotate(9deg);
+}
+.art-badge b{display:block;font-size:18px;line-height:1}
+.art-tap{
+  position:absolute;z-index:3;top:-4%;right:6%;font-family:var(--mono);font-size:9px;
+  font-weight:800;letter-spacing:.15em;color:var(--muted);
+}
+
+.hero-cta{display:flex;gap:10px;margin-top:18px}
+.btn-main{
+  flex:1;display:flex;justify-content:space-between;align-items:center;gap:10px;
+  background:var(--ink);color:var(--yellow);font-weight:900;font-size:15px;
+  padding:16px 18px;border-radius:18px;box-shadow:0 5px 0 rgba(46,36,21,.22);
+}
+.btn-main .arw{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--yellow);color:var(--ink);font-size:13px;flex:none}
+.btn-ghost{
+  padding:16px 18px;border-radius:18px;border:2px solid var(--ink);
+  background:#fff;font-weight:800;font-size:14px;white-space:nowrap;box-shadow:0 5px 0 rgba(46,36,21,.12);
+}
+.btn-main:active,.btn-ghost:active{transform:translateY(3px);box-shadow:none}
+
+/* ---------- 跑马灯 ---------- */
+.ticker{margin:28px -20px 0;padding:12px 0;overflow:hidden}
+.ticker-inner{
+  background:var(--ink);color:var(--yellow);transform:rotate(-1.4deg);
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  overflow:hidden;padding:9px 0;
+}
+.ticker-track{display:flex;width:max-content;animation:scrollX 24s linear infinite}
+.ticker-seq{display:flex;gap:26px;padding-right:26px;font-size:12.5px;font-weight:900;letter-spacing:.1em;white-space:nowrap}
+.ticker-seq i{font-style:normal;opacity:.45}
+
+/* ---------- 版块 ---------- */
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:34px 0 16px}
+.sec-title{font-size:25px;font-weight:900;letter-spacing:-.02em;display:flex;align-items:baseline;gap:9px}
+.sec-title small{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--muted)}
+.sec-note{font-size:10.5px;line-height:1.45;color:var(--muted);font-weight:700;text-align:right;flex:none}
+.sec-note b{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{
+  position:relative;display:flex;flex-direction:column;text-align:left;
+  background:#fff;border:2.5px solid var(--ink);border-radius:25px;
+  padding:8px 8px 4px;box-shadow:0 5px 0 var(--ink);
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.card:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.card-stage{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:134px;border-radius:18px;border:2px solid var(--ink);
+  background:var(--accent);overflow:hidden;
+}
+.card-stage::after{
+  content:"";position:absolute;inset:0;opacity:.65;pointer-events:none;
+  background-image:radial-gradient(rgba(46,36,21,.18) 1px,transparent 1.2px);
+  background-size:12px 12px;
+}
+.frog-host{position:relative;z-index:1;display:block;width:126px;height:126px}
+.frog-host svg{width:100%;height:100%;display:block}
+.card-num{
+  position:absolute;z-index:3;top:7px;left:8px;font-family:var(--mono);
+  font-size:9.5px;font-weight:800;background:#fff;border:1.5px solid var(--ink);
+  border-radius:999px;padding:1px 6px;
+}
+.card-stamp{
+  position:absolute;z-index:3;bottom:7px;right:8px;font-size:9px;font-weight:800;
+  background:var(--ink);color:#fff;border-radius:999px;padding:2px 8px;transform:rotate(-4deg);
+}
+.card-body{display:flex;flex-direction:column;gap:3px;padding:10px 5px 8px;flex:1}
+.card-meta{display:flex;justify-content:space-between;gap:6px;font-family:var(--mono);font-size:8.5px;letter-spacing:.07em;color:var(--muted);font-weight:700;white-space:nowrap}
+.card-title{font-size:20px;font-weight:900;letter-spacing:-.01em;line-height:1.15}
+.card-teaser{font-size:11px;line-height:1.45;color:var(--muted);font-weight:600}
+.card-cta{margin-top:auto;padding-top:7px;font-size:10.5px;font-weight:900;display:flex;align-items:center;gap:5px}
+.cta-arrow{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--ink);color:var(--yellow);font-size:10px;flex:none}
+
+.card.featured,.card.wide{grid-column:1/-1;display:grid;gap:9px;padding:9px}
+.card.featured{grid-template-columns:43% 1fr}
+.card.wide{grid-template-columns:39% 1fr}
+.card.featured .card-stage,.card.wide .card-stage{height:100%}
+.card.featured .card-stage{min-height:180px}
+.card.wide .card-stage{min-height:132px}
+.card.featured .frog-host{width:154px;height:154px}
+.card.featured .card-body,.card.wide .card-body{justify-content:center;padding:6px 8px 6px 2px}
+.card.featured .card-title{font-size:27px}
+.card.featured .card-teaser{font-size:12.5px}
+.card.wide .card-title{font-size:23px}
+
+/* ---------- 页脚 ---------- */
+.foot{
+  margin-top:26px;background:#fff;border:2.5px solid var(--ink);border-radius:26px;
+  padding:18px;box-shadow:0 5px 0 var(--ink);
+}
+.foot-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.foot-k{font-size:17px;font-weight:900;letter-spacing:-.01em}
+.foot-t{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:3px}
+.mini-btn{
+  flex:none;background:var(--yellow);border:2px solid var(--ink);border-radius:999px;
+  padding:9px 14px;font-size:11.5px;font-weight:900;box-shadow:0 3px 0 var(--ink);
+}
+.mini-btn:active{transform:translateY(3px);box-shadow:none}
+.foot-meta{
+  display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:16px;padding-top:13px;
+  border-top:1.5px dashed var(--line);font-family:var(--mono);
+  font-size:9px;letter-spacing:.05em;color:var(--muted);
+}
+.copy-hint{font-size:10.5px;color:var(--muted);margin-top:12px;line-height:1.6}
+
+/* ---------- 详情浮层 ---------- */
+.detail{
+  position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;
+  height:100vh;height:100dvh;background:var(--bg);
+  background-image:radial-gradient(rgba(46,36,21,.07) 1px,transparent 1.2px);
+  background-size:22px 22px;
+  transform:translateY(102%);visibility:hidden;pointer-events:none;
+  transition:transform .42s cubic-bezier(.22,.9,.24,1),visibility 0s .42s;
+}
+.detail.open{transform:none;visibility:visible;pointer-events:auto;transition:transform .42s cubic-bezier(.22,.9,.24,1),visibility 0s 0s}
+.detail-bar{
+  flex:none;display:flex;align-items:center;justify-content:space-between;
+  width:100%;max-width:560px;margin:0 auto;
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+}
+.bar-btn{
+  width:40px;height:40px;border-radius:50%;background:#fff;border:2px solid var(--ink);
+  display:grid;place-items:center;font-size:18px;font-weight:900;line-height:1;
+  box-shadow:0 3px 0 var(--ink);
+}
+.bar-btn:active{transform:translateY(3px);box-shadow:none}
+.bar-title{text-align:center;line-height:1.2}
+.bar-title span{display:block;font-size:9px;font-family:var(--mono);letter-spacing:.16em;color:var(--muted);font-weight:700}
+.bar-title b{font-size:13px;letter-spacing:.06em;font-family:var(--mono)}
+.bar-mark{
+  width:40px;height:40px;border-radius:50%;border:2px solid var(--ink);background:var(--yellow);
+  display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:900;
+}
+.detail-scroll{
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;
+  width:100%;max-width:560px;margin:0 auto;
+  padding:6px 16px calc(28px + env(safe-area-inset-bottom));
+}
+.detail-stage{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  height:min(44vh,364px);min-height:286px;
+  border:2.5px solid var(--ink);border-radius:30px;overflow:hidden;
+  background:var(--accent);
+  box-shadow:0 6px 0 var(--ink);
+}
+.aura{position:absolute;border-radius:50%;pointer-events:none}
+.a1{width:80%;aspect-ratio:1;border:1.5px dashed rgba(46,36,21,.3);animation:spin 30s linear infinite}
+.a2{width:58%;aspect-ratio:1;border:1.5px solid rgba(255,255,255,.7)}
+.stage-hint{
+  position:relative;z-index:4;display:block;width:max-content;
+  margin:9px auto 0;
+  font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;color:rgba(46,36,21,.55);
+  background:rgba(255,255,255,.72);border-radius:999px;padding:3px 9px;white-space:nowrap;
+}
+.detail-stage .frog-host{width:min(68vw,290px);height:min(68vw,290px);z-index:2}
+.detail-stage .frog-host svg{filter:drop-shadow(0 14px 18px rgba(90,55,0,.18))}
+.bubbles{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
+.ha{
+  position:absolute;bottom:23%;font-weight:900;color:var(--ink);background:#fff;
+  border:1.8px solid var(--ink);border-radius:999px;padding:1px 8px;
+  box-shadow:0 2px 0 var(--ink);white-space:nowrap;
+  animation:floatUp 1.5s ease-out forwards;
+}
+
+.detail-body{
+  position:relative;background:var(--cream);border:2.5px solid var(--ink);
+  border-radius:28px;margin-top:14px;padding:20px 18px 24px;
+  box-shadow:0 6px 0 var(--ink);
+}
+.d-kicker{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
+.d-kicker b{background:var(--ink);color:var(--yellow);border-radius:999px;padding:2px 7px;font-size:10px}
+.d-kicker span:last-child{margin-left:auto;color:var(--ink);letter-spacing:.04em}
+.d-title{font-size:34px;font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-top:8px}
+.d-desc{font-size:14px;line-height:1.8;color:#5A4A34;margin-top:10px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{
+  font-size:10px;font-weight:800;padding:5px 10px;border-radius:999px;
+  background:#fff;border:1.5px solid var(--line);
+}
+.steps-box{margin-top:20px;padding-top:18px;border-top:1.5px dashed var(--line)}
+.steps-head{display:flex;align-items:baseline;justify-content:space-between}
+.steps-head h3{font-size:16px;font-weight:900;letter-spacing:-.01em}
+.steps-head span{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;color:var(--muted);font-weight:700}
+.steps{margin-top:12px;display:flex;flex-direction:column;gap:9px}
+.steps li{display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:600;line-height:1.5;color:#4A3C28}
+.step-n{
+  flex:none;width:24px;height:24px;border-radius:50%;background:var(--yellow);
+  border:2px solid var(--ink);display:grid;place-items:center;font-family:var(--mono);
+  font-size:10px;font-weight:900;
+}
+.tip{
+  display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding:12px 13px;
+  background:#FFF3C4;border:1.5px solid rgba(46,36,21,.22);border-radius:16px;
+}
+.tip-tag{
+  flex:none;font-size:9px;font-weight:900;background:var(--ink);color:var(--yellow);
+  border-radius:6px;padding:2px 6px;margin-top:1px;
+}
+.tip p{font-size:11.5px;line-height:1.6;color:#5A4A34;font-weight:600}
+.d-actions{display:flex;gap:9px;margin-top:20px}
+.d-actions .btn-main{font-size:14px;padding:14px 16px;justify-content:center}
+.d-actions .btn-ghost{font-size:13px;padding:14px 15px;box-shadow:none;background:#fff}
+.d-foot{
+  margin-top:18px;text-align:center;font-family:var(--mono);font-size:8.5px;
+  line-height:1.7;letter-spacing:.06em;color:var(--muted);
+}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));z-index:200;
+  transform:translate(-50%,14px);background:var(--ink);color:#FFF6E1;
+  font-size:12px;font-weight:700;padding:11px 18px;border-radius:999px;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- 奶蛙造型 ---------- */
+.frog{width:100%;height:100%;display:block;overflow:visible}
+.frog-all{transform-box:fill-box;transform-origin:50% 90%;animation:breathe 3.8s ease-in-out infinite}
+.frog-mouth{transform-box:fill-box;transform-origin:50% 38%}
+.frog-eyes-open{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5.2s infinite}
+.frog-eyes-squint,.frog-eyes-x,.frog-sweat{opacity:0}
+.frog-pupil{transition:opacity .2s ease}
+.frog-arm{transform-box:view-box;transition:transform .35s ease}
+.frog-arm-l{transform-origin:82px 192px}
+.frog-arm-r{transform-origin:238px 192px}
+
+/* 卡片静态造型 */
+.card-stage .frog-eyes-open{animation:none}
+[data-pose="laugh"] .frog-pupil{opacity:0}
+[data-pose="laugh"] .frog-eyes-squint{opacity:1}
+[data-pose="charge"] .frog-mouth{transform:scaleY(.55)}
+[data-pose="charge"] .frog-eyes-open{transform:scaleY(.58)}
+[data-pose="charge"] .frog-sweat{opacity:1}
+[data-pose="belly"] .frog-arm-l{transform:rotate(38deg)}
+[data-pose="belly"] .frog-arm-r{transform:rotate(-38deg)}
+[data-pose="belly"] .frog-pupil{opacity:0}
+[data-pose="belly"] .frog-eyes-squint{opacity:1}
+[data-pose="tremble"] .frog-all{animation:none;transform:rotate(-4deg)}
+[data-pose="tremble"] .frog-pupil{opacity:0}
+[data-pose="tremble"] .frog-eyes-squint{opacity:1}
+[data-pose="faint"] .frog-all{animation:none;transform:rotate(-19deg) translateY(7px)}
+[data-pose="faint"] .frog-pupil{opacity:0}
+[data-pose="faint"] .frog-eyes-x{opacity:1}
+[data-pose="faint"] .frog-arm-l{transform:rotate(-14deg)}
+[data-pose="faint"] .frog-arm-r{transform:rotate(14deg)}
+[data-pose="wave"] .frog-arm-l{transform:rotate(-55deg)}
+[data-pose="wave"] .frog-pupil{opacity:0}
+[data-pose="wave"] .frog-eyes-squint{opacity:1}
+
+/* 详情动作 */
+.detail-stage.play .frog-eyes-open{animation:none}
+.detail-stage.play[data-act="laugh"] .frog-all{animation:laughBounce .58s cubic-bezier(.36,.07,.19,.97) infinite}
+.detail-stage.play[data-act="laugh"] .frog-mouth{animation:mouthLaugh .29s ease-in-out infinite}
+.detail-stage.play[data-act="laugh"] .frog-pupil{opacity:0}
+.detail-stage.play[data-act="laugh"] .frog-eyes-squint{opacity:1}
+.detail-stage.play[data-act="laugh"] .frog-arm-l{animation:armFlap .58s ease-in-out infinite}
+.detail-stage.play[data-act="laugh"] .frog-arm-r{animation:armFlapR .58s ease-in-out infinite}
+
+.detail-stage.play[data-act="charge"] .frog-all{animation:chargeShake .42s ease-in-out infinite}
+.detail-stage.play[data-act="charge"] .frog-mouth{transform:scaleY(.52);animation:chargeMouth .9s ease-in-out infinite}
+.detail-stage.play[data-act="charge"] .frog-eyes-open{transform:scaleY(.56)}
+.detail-stage.play[data-act="charge"] .frog-sweat{opacity:1;animation:sweat 1.5s ease-in-out infinite}
+
+.detail-stage.play[data-act="belly"] .frog-all{animation:rock 1.05s ease-in-out infinite}
+.detail-stage.play[data-act="belly"] .frog-arm-l{transform:rotate(40deg)}
+.detail-stage.play[data-act="belly"] .frog-arm-r{transform:rotate(-40deg)}
+.detail-stage.play[data-act="belly"] .frog-pupil{opacity:0}
+.detail-stage.play[data-act="belly"] .frog-eyes-squint{opacity:1}
+.detail-stage.play[data-act="belly"] .frog-mouth{animation:mouthLaugh .52s ease-in-out infinite}
+
+.detail-stage.play[data-act="tremble"] .frog-all{animation:jitter .1s linear infinite}
+.detail-stage.play[data-act="tremble"] .frog-mouth{animation:mouthLaugh .16s linear infinite}
+.detail-stage.play[data-act="tremble"] .frog-pupil{opacity:0}
+.detail-stage.play[data-act="tremble"] .frog-eyes-squint{opacity:1}
+
+.detail-stage.play[data-act="faint"] .frog-all{animation:faintFall 3.4s ease-in-out infinite;transform-origin:50% 92%}
+.detail-stage.play[data-act="faint"] .frog-pupil{opacity:0}
+.detail-stage.play[data-act="faint"] .frog-eyes-x{opacity:1}
+.detail-stage.play[data-act="faint"] .frog-arm-l{transform:rotate(-16deg)}
+.detail-stage.play[data-act="faint"] .frog-arm-r{transform:rotate(16deg)}
+
+.detail-stage.play[data-act="wave"] .frog-all{animation:rock 1.6s ease-in-out infinite}
+.detail-stage.play[data-act="wave"] .frog-arm-l{animation:wave .74s ease-in-out infinite}
+.detail-stage.play[data-act="wave"] .frog-pupil{opacity:0}
+.detail-stage.play[data-act="wave"] .frog-eyes-squint{opacity:1}
+.detail-stage.play[data-act="wave"] .frog-mouth{animation:mouthLaugh .9s ease-in-out infinite}
+
+/* ---------- 关键帧 ---------- */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.025,.982)}}
+@keyframes blink{0%,91%,100%{transform:scaleY(1)}94%,96%{transform:scaleY(.08)}}
+@keyframes laughBounce{
+  0%,100%{transform:translateY(0) rotate(0)}
+  22%{transform:translateY(-10px) rotate(-2deg)}
+  46%{transform:translateY(1px) rotate(1.6deg)}
+  72%{transform:translateY(-7px) rotate(-1deg)}
+}
+@keyframes mouthLaugh{0%,100%{transform:scale(1,1)}50%{transform:scale(1.05,.82)}}
+@keyframes armFlap{0%,100%{transform:rotate(0)}50%{transform:rotate(-14deg)}}
+@keyframes armFlapR{0%,100%{transform:rotate(0)}50%{transform:rotate(14deg)}}
+@keyframes rock{0%,100%{transform:rotate(-3.2deg)}50%{transform:rotate(3.2deg)}}
+@keyframes jitter{
+  0%{transform:translate(0,0) rotate(0)}
+  25%{transform:translate(-2px,1px) rotate(-.8deg)}
+  50%{transform:translate(2px,-1px) rotate(.8deg)}
+  75%{transform:translate(-1px,-2px) rotate(-.4deg)}
+  100%{transform:translate(0,0) rotate(0)}
+}
+@keyframes faintFall{
+  0%,12%{transform:rotate(0) translateY(0)}
+  32%,80%{transform:translate(-4px,-24px) rotate(70deg)}
+  100%{transform:rotate(0) translateY(0)}
+}
+@keyframes wave{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(-64deg)}}
+@keyframes chargeShake{0%,100%{transform:translateX(0)}50%{transform:translateX(2.5px)}}
+@keyframes chargeMouth{0%,100%{transform:scaleY(.48)}50%{transform:scaleY(.62)}}
+@keyframes sweat{0%,100%{transform:translateY(0);opacity:1}60%{transform:translateY(5px);opacity:.4}}
+@keyframes floatUp{
+  0%{transform:translate(0,0) rotate(0) scale(.7);opacity:0}
+  18%{opacity:1;transform:translate(0,-6px) rotate(var(--rot,0deg)) scale(1)}
+  100%{opacity:0;transform:translate(var(--drift,0px),-92px) rotate(var(--rot,0deg)) scale(1.04)}
+}
+@keyframes scrollX{to{transform:translateX(-50%)}}
+
+/* 入场 */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 渐变定义 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0" stop-color="#FFE374"/>
+      <stop offset="0.52" stop-color="#FFD23F"/>
+      <stop offset="1" stop-color="#F0AB22"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- 奶蛙模板 -->
+<template id="frogTpl">
+  <svg class="frog" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <g class="frog-all">
+    <!-- 脚 -->
+    <g class="frog-feet">
+      <ellipse cx="98" cy="262" rx="33" ry="14" fill="url(#skin)" stroke="#2E2415" stroke-width="6" transform="rotate(-10 98 262)"/>
+      <ellipse cx="222" cy="262" rx="33" ry="14" fill="url(#skin)" stroke="#2E2415" stroke-width="6" transform="rotate(10 222 262)"/>
+      <path d="M84 263l5-8M98 263v-9M112 263l-5-8" stroke="#2E2415" stroke-width="3.5" stroke-linecap="round" opacity=".45"/>
+      <path d="M208 263l5-8M222 263v-9M236 263l-5-8" stroke="#2E2415" stroke-width="3.5" stroke-linecap="round" opacity=".45"/>
+    </g>
+
+    <!-- 身体 -->
+    <path class="frog-body" d="M160 74C204 74 228 106 235 148C246 210 226 268 160 268C94 268 74 210 85 148C92 106 116 74 160 74Z"
+      fill="url(#skin)" stroke="#2E2415" stroke-width="7" stroke-linejoin="round"/>
+    <!-- 肚皮 -->
+    <path d="M160 166C202 166 224 198 220 230C216 255 195 263 160 263C125 263 104 255 100 230C96 198 118 166 160 166Z"
+      fill="#FFF0B0" opacity=".92"/>
+    <!-- 高光 -->
+    <ellipse cx="112" cy="132" rx="16" ry="26" fill="#fff" opacity=".28" transform="rotate(-24 112 132)"/>
+
+    <!-- 手臂 -->
+    <g class="frog-arm frog-arm-l">
+      <rect x="66" y="188" width="31" height="64" rx="15.5" fill="url(#skin)" stroke="#2E2415" stroke-width="7" transform="rotate(-18 81.5 220)"/>
+    </g>
+    <g class="frog-arm frog-arm-r">
+      <rect x="223" y="188" width="31" height="64" rx="15.5" fill="url(#skin)" stroke="#2E2415" stroke-width="7" transform="rotate(18 238.5 220)"/>
+    </g>
+
+    <!-- 眼睛 -->
+    <g class="frog-eyes frog-eyes-open">
+      <circle cx="120" cy="96" r="35" fill="#EAF7C6" stroke="#2E2415" stroke-width="7"/>
+      <circle cx="200" cy="96" r="35" fill="#EAF7C6" stroke="#2E2415" stroke-width="7"/>
+      <circle class="frog-pupil" cx="126" cy="102" r="12.5" fill="#2E2415"/>
+      <circle class="frog-pupil" cx="194" cy="102" r="12.5" fill="#2E2415"/>
+      <circle class="frog-pupil" cx="122" cy="97" r="4" fill="#fff"/>
+      <circle class="frog-pupil" cx="190" cy="97" r="4" fill="#fff"/>
+    </g>
+    <g class="frog-eyes frog-eyes-squint">
+      <path d="M88 100Q120 82 152 100" stroke="#2E2415" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M168 100Q200 82 232 100" stroke="#2E2415" stroke-width="7" fill="none" stroke-linecap="round"/>
+    </g>
+    <g class="frog-eyes frog-eyes-x">
+      <path d="M106 82L134 110M134 82L106 110" stroke="#2E2415" stroke-width="8" stroke-linecap="round"/>
+      <path d="M186 82L214 110M214 82L186 110" stroke="#2E2415" stroke-width="8" stroke-linecap="round"/>
+    </g>
+
+    <!-- 嘴 -->
+    <g class="frog-mouth">
+      <path d="M108 158C126 148 194 148 212 158C212 204 190 222 160 222C130 222 108 204 108 158Z"
+        fill="#68262A" stroke="#2E2415" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M119 200C134 186 186 186 201 200C196 214 180 221 160 221C140 221 124 214 119 200Z" fill="#F98E8B"/>
+    </g>
+
+    <!-- 鼻孔 & 腮红 -->
+    <circle cx="146" cy="140" r="3.2" fill="#2E2415" opacity=".6"/>
+    <circle cx="174" cy="140" r="3.2" fill="#2E2415" opacity=".6"/>
+    <ellipse cx="98" cy="174" rx="14" ry="8" fill="#FF8C6B" opacity=".42"/>
+    <ellipse cx="222" cy="174" rx="14" ry="8" fill="#FF8C6B" opacity=".42"/>
+
+    <!-- 冷汗 -->
+    <g class="frog-sweat">
+      <path d="M264 84C264 84 251 103 251 112a13 13 0 0 0 26 0c0-9-13-28-13-28Z" fill="#8ED0FF" stroke="#2E2415" stroke-width="5"/>
+    </g>
+    </g>
+  </svg>
+</template>
+
+<div class="page">
+  <div class="nav">
+    <span class="nav-logo"><i class="nav-dot"></i>MILKY FROG</span>
+    <span class="nav-tag">非官方 · 动作图鉴 VOL.01</span>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">6 ACTIONS · 点开才看得到</p>
+    <h1 class="hero-title">
+      <span class="t-pre">点一下，</span>
+      <span class="t-main">就<span class="mark">狂笑</span>。</span>
+    </h1>
+    <p class="hero-desc">六份奶蛙动作档案，藏在卡片里。<br>点进去，才知道它能笑成什么样。</p>
+
+    <div class="hero-art" aria-hidden="true">
+      <span class="art-ring"></span>
+      <span class="art-circle"></span>
+      <span class="hero-bubble hb1">哈</span>
+      <span class="hero-bubble hb2">哈哈哈</span>
+      <span class="hero-bubble hb3">憋不住了</span>
+      <span class="frog-host hero-frog" data-frog></span>
+      <span class="art-badge"><span><b>6</b>ACTIONS</span></span>
+      <span class="art-tap">TAP TAP</span>
+    </div>
+
+    <div class="hero-cta">
+      <button class="btn-main" id="randomBtn" type="button">
+        随机抽一个动作
+        <span class="arw">→</span>
+      </button>
+      <button class="btn-ghost" id="browseBtn" type="button">往下翻</button>
+    </div>
+  </header>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner">
+      <div class="ticker-track">
+        <div class="ticker-seq">
+          <span>哈哈哈</span><i>·</i><span>HAHAHA</span><i>·</i><span>捧腹</span><i>·</i><span>笑到发抖</span><i>·</i><span>赛博诵经</span><i>·</i><span>当场躺平</span><i>·</i><span>招财</span><i>·</i><span>6 ACTIONS</span><i>·</i>
+        </div>
+        <div class="ticker-seq">
+          <span>哈哈哈</span><i>·</i><span>HAHAHA</span><i>·</i><span>捧腹</span><i>·</i><span>笑到发抖</span><i>·</i><span>赛博诵经</span><i>·</i><span>当场躺平</span><i>·</i><span>招财</span><i>·</i><span>6 ACTIONS</span><i>·</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <h2 class="sec-title">动作档案 <small>ARCHIVE</small></h2>
+    <p class="sec-note"><b>01—06</b>点击卡片解锁</p>
+  </div>
+
+  <main class="grid" id="grid"></main>
+
+  <footer class="foot">
+    <div class="foot-top">
+      <div>
+        <p class="foot-k">把笑声传下去</p>
+        <p class="foot-t">转发给一个笑点低的朋友</p>
+      </div>
+      <button class="mini-btn" id="copyLink" type="button">复制链接</button>
+    </div>
+    <p class="copy-hint">微信内打开体验最佳：点右上角「···」发送给朋友，或复制链接后粘贴到聊天里。</p>
+    <div class="foot-meta">
+      <span>© 奶蛙动作图鉴</span>
+      <span>非官方 · 粉丝向趣味演绎</span>
+      <span>动效为原创示意</span>
+    </div>
+  </footer>
+</div>
+
+<!-- 详情浮层 -->
+<section class="detail" id="detail" role="dialog" aria-modal="true" aria-label="奶蛙动作详情" aria-hidden="true">
+  <div class="detail-bar">
+    <button class="bar-btn" id="backBtn" type="button" aria-label="返回图鉴">←</button>
+    <div class="bar-title">
+      <span>ACTION FILE</span>
+      <b id="dCounter">01 / 06</b>
+    </div>
+    <span class="bar-mark" aria-hidden="true">MF</span>
+  </div>
+
+  <div class="detail-scroll" id="detailScroll">
+    <div class="detail-stage play" id="detailStage" data-act="laugh">
+      <span class="aura a1"></span>
+      <span class="aura a2"></span>
+      <span class="frog-host" data-frog></span>
+      <div class="bubbles" id="bubbleLayer"></div>
+    </div>
+    <span class="stage-hint">点画面 · 再来一次</span>
+
+    <div class="detail-body">
+      <p class="d-kicker">
+        <b id="dNum">01</b>
+        <span id="dEn">HAHAHA</span>
+        <span id="dLevel">笑点 5.0</span>
+      </p>
+      <h2 class="d-title" id="dTitle">招牌狂笑</h2>
+      <p class="d-desc" id="dDesc"></p>
+      <div class="chips" id="dChips"></div>
+
+      <div class="steps-box">
+        <div class="steps-head">
+          <h3>动作分解</h3>
+          <span>3 STEPS</span>
+        </div>
+        <ol class="steps" id="dSteps"></ol>
+      </div>
+
+      <div class="tip">
+        <span class="tip-tag">彩蛋</span>
+        <p id="dTip"></p>
+      </div>
+
+      <div class="d-actions">
+        <button class="btn-main" id="replayBtn" type="button">再看一次</button>
+        <button class="btn-ghost" id="nextBtn" type="button">下一个 →</button>
+      </div>
+
+      <p class="d-foot">奶蛙动作图鉴 · 非官方粉丝向演绎<br>截图或转发，把笑声传给下一位</p>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var ACTIONS = [
+    {
+      id:"laugh", num:"01", en:"HAHAHA", title:"招牌狂笑",
+      teaser:"点一下，就狂笑。", stamp:"招牌",
+      level:"5.0", accent:"#FFD23F",
+      trigger:"轻点一下", duration:"无限循环",
+      desc:"奶蛙的看家本领。只要被点一下，它就会从嘴角一抽开始，迅速升级成前仰后合的大笑，笑声大到能把整个屏幕震出回声。",
+      steps:["嘴角先抽两下，当作前摇","嘴巴张到最大，身体前后晃动","笑到停不下来，进入无限循环"],
+      tip:"连续点它三下，会触发「笑到打嗝」的隐藏节奏。"
+    },
+    {
+      id:"charge", num:"02", en:"WARM-UP", title:"憋笑前摇",
+      teaser:"暴风雨前的 0.5 秒", stamp:"前摇",
+      level:"4.2", accent:"#FFC46B",
+      trigger:"被看一眼", duration:"0.5 秒",
+      desc:"真正的笑还没开始，奶蛙先给你一个「我憋不住了」的表情：嘴角抽动、眼睛眯起、肚子轻轻发抖，连冷汗都冒出来了。",
+      steps:["嘴角小幅度抽动","眼睛慢慢眯成一条缝","肚子里传来第一声笑"],
+      tip:"截图这一帧，适合当「我不行了」的表情包。"
+    },
+    {
+      id:"belly", num:"03", en:"BELLY LAUGH", title:"捧腹大笑",
+      teaser:"笑到要扶住肚子", stamp:"捧腹",
+      level:"5.0", accent:"#FF9E7A",
+      trigger:"笑点太低", duration:"3 分钟起",
+      desc:"奶蛙笑得直不起腰，两只小短手死死抱住肚子，身体左右摇摆，仿佛下一秒就要笑到打鸣。",
+      steps:["两只小短手抱住肚子","身体左右摇摆","笑到打鸣，停不下来"],
+      tip:"别在喝水时观看，容易笑喷。"
+    },
+    {
+      id:"tremble", num:"04", en:"VIBRATE", title:"笑到发抖",
+      teaser:"赛博诵经，笑到共振", stamp:"高频",
+      level:"5.0", accent:"#CBE86B",
+      trigger:"连点三下", duration:"高频持续",
+      desc:"奶蛙进入高频抖动模式，嘴角疯狂上扬，整只蛙笑出残影。网友把这段动作称为「赛博诵经」。",
+      steps:["嘴角开始高频抽动","全身跟着一起抖","笑出残影，画面共振"],
+      tip:"手机开启振动模式，效果更佳（并不）。"
+    },
+    {
+      id:"faint", num:"05", en:"KO", title:"笑到脱力",
+      teaser:"当场躺平，笑晕过去", stamp:"KO",
+      level:"5.0", accent:"#A9C8FF",
+      trigger:"笑点暴击", duration:"直到缓过来",
+      desc:"奶蛙的笑点没有上限，体力却有。笑到最后，它两眼一闭、四脚朝天，当场躺平，只剩肚子还在轻轻发抖。",
+      steps:["笑声突然拔高","身体慢慢向后倒","四脚朝天，当场躺平"],
+      tip:"躺平不是放弃，是奶蛙的充电方式。"
+    },
+    {
+      id:"fortune", num:"06", en:"LUCKY WAVE", title:"招财一挥手",
+      teaser:"笑一笑，财来到", stamp:"招财",
+      level:"3.8", accent:"#FFD86B",
+      trigger:"转发给朋友", duration:"一整周",
+      desc:"奶蛙的隐藏技能：一边笑，一边抬起圆滚滚的小短手左右挥动。据说把这只奶蛙转发给朋友，接下来一周的笑点和好运都会变多。",
+      steps:["抬起圆滚滚的小短手","左右挥动，招财进宝","配一个招牌大笑收尾"],
+      tip:"转发给三位朋友，奶蛙会笑得更用力（心理作用）。"
+    }
+  ];
+
+  var tpl = document.getElementById("frogTpl");
+  var grid = document.getElementById("grid");
+  var detail = document.getElementById("detail");
+  var detailScroll = document.getElementById("detailScroll");
+  var detailStage = document.getElementById("detailStage");
+  var bubbleLayer = document.getElementById("bubbleLayer");
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+  var current = -1;
+  var lastFocus = null;
+  var detailOpenFlag = false;
+  var pushed = false;
+
+  function mountFrog(host){
+    host.innerHTML = "";
+    host.appendChild(tpl.content.cloneNode(true));
+  }
+
+  function el(id){ return document.getElementById(id); }
+
+  function renderCards(){
+    ACTIONS.forEach(function(a, i){
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "card reveal" +
+        (i === 0 ? " featured" : "") +
+        (i === ACTIONS.length - 1 ? " wide" : "");
+      btn.style.setProperty("--accent", a.accent);
+      btn.style.transitionDelay = Math.min(i * 45, 240) + "ms";
+      btn.setAttribute("aria-label", a.num + " " + a.title + "：" + a.teaser + "，点开查看动作");
+
+      btn.innerHTML =
+        '<span class="card-stage" data-pose="' + a.id + '">' +
+          '<span class="card-num">' + a.num + '</span>' +
+          '<span class="frog-host" data-frog></span>' +
+          '<span class="card-stamp">' + a.stamp + '</span>' +
+        '</span>' +
+        '<span class="card-body">' +
+          '<span class="card-meta"><span class="card-en">' + a.en + '</span><span>笑点 ' + a.level + '</span></span>' +
+          '<span class="card-title">' + a.title + '</span>' +
+          '<span class="card-teaser">' + a.teaser + '</span>' +
+          '<span class="card-cta">点开看动作 <span class="cta-arrow">→</span></span>' +
+        '</span>';
+
+      btn.addEventListener("click", function(){ openDetail(i, btn); });
+      grid.appendChild(btn);
+    });
+  }
+
+  function fillDetail(i){
+    var a = ACTIONS[i];
+    current = i;
+    detail.style.setProperty("--accent", a.accent);
+    detailStage.setAttribute("data-act", a.id);
+    el("dCounter").textContent = a.num + " / 06";
+    el("dNum").textContent = a.num;
+    el("dEn").textContent = a.en;
+    el("dLevel").textContent = "笑点 " + a.level;
+    el("dTitle").textContent = a.title;
+    el("dDesc").textContent = a.desc;
+    el("dTip").textContent = a.tip;
+
+    el("dChips").innerHTML =
+      '<span class="chip">触发 · ' + a.trigger + '</span>' +
+      '<span class="chip">时长 · ' + a.duration + '</span>' +
+      '<span class="chip">笑点 · ' + a.level + ' / 5.0</span>';
+
+    el("dSteps").innerHTML = a.steps.map(function(s, k){
+      return '<li><span class="step-n">' + (k + 1) + '</span><span>' + s + '</span></li>';
+    }).join("");
+
+    replay(false);
+  }
+
+  function replay(withBubbles){
+    if (withBubbles === undefined) withBubbles = true;
+    detailStage.classList.remove("play");
+    void detailStage.offsetWidth;
+    detailStage.classList.add("play");
+    if (withBubbles) {
+      var act = detailStage.getAttribute("data-act");
+      if (act !== "charge") spawnBubbles(act === "faint" ? 2 : 5);
+    }
+  }
+
+  function spawnBubbles(n){
+    var words = ["哈", "哈", "哈", "哈哈哈", "嘿嘿"];
+    for (var i = 0; i < n; i++) {
+      var b = document.createElement("span");
+      b.className = "ha";
+      b.textContent = words[Math.floor(Math.random() * words.length)];
+      b.style.left = (11 + Math.random() * 72) + "%";
+      b.style.fontSize = (11 + Math.random() * 10) + "px";
+      b.style.animationDelay = (Math.random() * 0.18) + "s";
+      b.style.setProperty("--drift", (Math.random() * 34 - 17) + "px");
+      b.style.setProperty("--rot", (Math.random() * 24 - 12) + "deg");
+      bubbleLayer.appendChild(b);
+      (function(node){
+        setTimeout(function(){ if (node.parentNode) node.parentNode.removeChild(node); }, 1800);
+      })(b);
+    }
+  }
+
+  function lockScroll(){
+    document.documentElement.classList.add("is-locked");
+    document.body.classList.add("is-locked");
+  }
+  function unlockScroll(){
+    document.documentElement.classList.remove("is-locked");
+    document.body.classList.remove("is-locked");
+  }
+
+  function openDetail(i, trigger){
+    lastFocus = trigger || document.activeElement;
+    fillDetail(i);
+    detailScroll.scrollTop = 0;
+    detail.classList.add("open");
+    detail.setAttribute("aria-hidden", "false");
+    detailOpenFlag = true;
+    lockScroll();
+    if (!pushed) {
+      try { history.pushState({ mf: 1 }, ""); pushed = true; }
+      catch (e) { pushed = false; }
+    }
+    setTimeout(function(){
+      var back = el("backBtn");
+      if (back) back.focus({ preventScroll: true });
+    }, 80);
+  }
+
+  function hideDetail(){
+    detail.classList.remove("open");
+    detail.setAttribute("aria-hidden", "true");
+    detailOpenFlag = false;
+    unlockScroll();
+    if (lastFocus && lastFocus.focus) {
+      setTimeout(function(){ lastFocus.focus({ preventScroll: true }); }, 90);
+    }
+  }
+
+  function closeDetail(){
+    if (pushed) {
+      try { history.back(); return; } catch (e) {}
+    }
+    hideDetail();
+  }
+
+  window.addEventListener("popstate", function(){
+    if (detailOpenFlag) {
+      pushed = false;
+      hideDetail();
+    }
+  });
+
+  el("backBtn").addEventListener("click", closeDetail);
+
+  el("nextBtn").addEventListener("click", function(){
+    fillDetail((current + 1) % ACTIONS.length);
+    detailScroll.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  el("replayBtn").addEventListener("click", function(){ replay(true); });
+
+  detailStage.addEventListener("click", function(){ replay(true); });
+
+  el("randomBtn").addEventListener("click", function(){
+    var n = ACTIONS.length;
+    var pick = Math.floor(Math.random() * n);
+    if (pick === current) pick = (pick + 1) % n;
+    openDetail(pick, el("randomBtn"));
+  });
+
+  el("browseBtn").addEventListener("click", function(){
+    var head = document.querySelector(".sec-head");
+    if (head) head.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  el("copyLink").addEventListener("click", function(){
+    var url = location.href;
+    function done(){ toast("链接已复制，去微信粘贴分享"); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(fallback);
+    } else {
+      fallback();
+    }
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = url;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); }
+      catch (e) { toast("复制失败，请长按地址栏复制"); }
+      document.body.removeChild(ta);
+    }
+  });
+
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 2200);
+  }
+
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && detailOpenFlag) closeDetail();
+  });
+
+  renderCards();
+  document.querySelectorAll("[data-frog]").forEach(mountFrog);
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(function(node){ io.observe(node); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(node){ node.classList.add("in"); });
+  }
+})();
+</script>
+</body>
+</html>
